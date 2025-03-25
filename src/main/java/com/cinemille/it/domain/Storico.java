@@ -103,7 +103,20 @@ public class Storico implements Serializable {
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
-    @Override
+    public Storico(Long id, @NotNull LocalDate dataInizio, @NotNull LocalDate dataFine, Film film, Sala sala) {
+		super();
+		this.id = id;
+		this.dataInizio = dataInizio;
+		this.dataFine = dataFine;
+		this.film = film;
+		this.sala = sala;
+	}
+
+	public Storico() {
+		super();
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

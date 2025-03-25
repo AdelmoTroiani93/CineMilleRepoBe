@@ -50,19 +50,20 @@ public class StoricoService {
     }
 
    
- /*   
+  
+    
     @Transactional
     @Scheduled(cron = "0 0 2 * * ?") // Esegue ogni giorno alle 02:00 di notte
     public void spostaProiezioniScadute() {
-        Instant oggi = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
+        LocalDate oggi = LocalDate.now();
         
         // Prendi le proiezioni scadute
-        List<Proiezione> proiezioniScadute = proiezioneRepository.findByDataProiezioneBefore(oggi);
+        List<Proiezione> proiezioniScadute = proiezioneRepository.findByDataFineBefore(oggi);
 
         if (!proiezioniScadute.isEmpty()) {
             // Converti e salva nello storico
             List<Storico> storicoList = proiezioniScadute.stream().map(p -> 
-                new Storico(p.getId(), p.getTitolo(), p.getDataProiezione())
+                new Storico(p.getId(),p.getDataProiezione(),p.getDataFine(),p.getFilm(),p.getSala())
             ).toList();
             storicoRepository.saveAll(storicoList);
 
@@ -73,5 +74,5 @@ public class StoricoService {
         } else {
             System.out.println("⚠️ Nessuna proiezione scaduta trovata.");
         }
-    }*/
+    }
 }

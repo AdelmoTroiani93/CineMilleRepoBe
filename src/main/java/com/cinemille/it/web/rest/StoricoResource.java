@@ -47,7 +47,7 @@ public class StoricoResource {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<Storico>> getAllProieziones(
+    public ResponseEntity<Page<Storico>> getAllStorico(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInizio,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFine,
             Pageable pageable) {
@@ -70,5 +70,12 @@ public class StoricoResource {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(null);  // Puoi anche inviare un messaggio di errore specifico nel corpo
         }
+    }
+    
+
+    @GetMapping("/run-scheduler")
+    public String runScheduler() {
+    	storicoService.spostaProiezioniScadute();
+        return "Scheduler eseguito manualmente!";
     }
 }
